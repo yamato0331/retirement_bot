@@ -3,7 +3,7 @@ requests
 numpy
 chatterbot
 chatterbot_corpus
-spacy
+spacy<3.0
 setuptools==60.2.0
 wheel
 cymem
