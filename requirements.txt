@@ -3,3 +3,4 @@ requests
 numpy
 chatterbot
 chatterbot_corpus
+textblob
