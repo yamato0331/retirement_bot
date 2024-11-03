@@ -4,4 +4,3 @@ numpy
 chatterbot
 chatterbot_corpus
 textblob
---upgrade pip

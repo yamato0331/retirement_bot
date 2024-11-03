@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for
-from chatbot import chatbot
 import os
-os.system("pip install spacy==2.0.18")
 
+os.system("pip install --upgrade pip")
+
+from flask import Flask, render_template, request
+from chatterbot import ChatBot
+from textblob import TextBlob
 
 app = Flask(__name__)
 
+chatbot = ChatBot("RetirementBot")
 # アップロード先のディレクトリ
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
