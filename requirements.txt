@@ -4,5 +4,4 @@ numpy
 chatterbot
 chatterbot_corpus
 textblob
-pyyaml==3.13
-Cython
+PyYAML==5.4.1
