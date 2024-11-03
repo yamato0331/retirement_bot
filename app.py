@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request
 from chatterbot import ChatBot
-from textblob import TextBlob
+from transformers import pipeline
 
 app = Flask(__name__)
 
 chatbot = ChatBot("RetirementBot")
+sentiment_pipeline = pipeline("sentiment-analysis")
 
 @app.route("/")
 def home():
@@ -13,10 +14,10 @@ def home():
 @app.route("/get")
 def get_bot_response():
     user_text = request.args.get('msg')
-    analysis = TextBlob(user_text)
-    if analysis.sentiment.polarity > 0:
+    sentiment = sentiment_pipeline(user_text)[0]
+    if sentiment['label'] == 'POSITIVE':
         return str(chatbot.get_response(user_text)) + " 😊"
-    elif analysis.sentiment.polarity < 0:
+    elif sentiment['label'] == 'NEGATIVE':
         return str(chatbot.get_response(user_text)) + " 😟"
     else:
         return str(chatbot.get_response(user_text))
