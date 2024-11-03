@@ -15,9 +15,9 @@ def get_bot_response():
     user_text = request.args.get('msg')
     analysis = TextBlob(user_text)
     if analysis.sentiment.polarity > 0:
-        return str(chatbot.get_response(user_text)) + " 😃"
+        return str(chatbot.get_response(user_text)) + " 😊"
     elif analysis.sentiment.polarity < 0:
-        return str(chatbot.get_response(user_text)) + " 😞"
+        return str(chatbot.get_response(user_text)) + " 😟"
     else:
         return str(chatbot.get_response(user_text))
 
