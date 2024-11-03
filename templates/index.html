@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>退職手続きBot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #chatbox {
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            overflow-y: scroll;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1.1em;
+        }
+        #userInput {
+            width: 75%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #warning {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+        #options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        #options button {
+            margin: 5px;
+            flex: 1 0 30%; /* 3ボタンのレイアウトを目指す */
+        }
+        @media (max-width: 600px) {
+            #chatbox {
+                max-width: 90%;
+            }
+            #userInput {
+                width: 70%;
+            }
+            button {
+                width: 40%; /* スマホの時のボタン幅 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>退職手続きBot</h1>
+    <div id="chatbox">
+        <p>Bot: 退職手続きBotへようこそ。ご質問をどうぞ。</p>
+    </div>
+
+    <h3>退職手続きに関する質問</h3>
+    <div id="options">
+        <button onclick="selectOption('退職したいです。')">退職したいです。</button>
+        <button onclick="selectOption('退職届はどこで入手できますか？')">退職届はどこで入手できますか？</button>
+        <button onclick="selectOption('退職金は支給されますか？')">退職金は支給されますか？</button>
+        <button onclick="selectOption('健康保険はどうなりますか？')">健康保険はどうなりますか？</button>
+        <button onclick="selectOption('有給休暇は消化できますか？')">有給休暇は消化できますか？</button>
+        <button onclick="selectOption('離職票は発行されますか？')">離職票は発行されますか？</button>
+        <button onclick="selectOption('退職後の年金手続きはどうすればよいですか？')">年金手続きについて</button>
+        <button onclick="selectOption('退職金の金額はどのように決まりますか？')">退職金の金額</button>
+    </div>
+
+    <!-- ファイルアップロードフォーム -->
+    <h3>退職届をアップロード</h3>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="fileInput">退職届をアップロード:</label>
+        <input type="file" id="fileInput" name="file" required>
+        <button type="submit">アップロード</button>
+    </form>
+    <div id="warning">アップロード形式はPDFまたはWord形式のみです</div>
+
+    <script>
+        function selectOption(option) {
+            $("#chatbox").append("<p>あなた: " + option + "</p>");
+            $.get("/get", { msg: option }).done(function(data) {
+                $("#chatbox").append("<p>Bot: " + data + "</p>");
+                $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight); // スクロールをボトムに移動
+            });
+        }
+
+        // ファイルアップロードの処理
+        $('#uploadForm').on('submit', function(event) {
+            event.preventDefault(); // デフォルトの送信を防ぐ
+            var formData = new FormData(this);
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    // 成功時のメッセージをポップアップ表示
+                    alert(response);
+                    $("#chatbox").append("<p>Bot: " + response + "</p>"); // 成功時のメッセージを表示
+                },
+                error: function(jqXHR) {
+                    // エラーメッセージをポップアップで表示
+                    alert("エラーが発生しました: " + jqXHR.responseText);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
