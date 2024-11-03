@@ -1,7 +1,0 @@
-flask
-requests
-numpy
-chatterbot
-textblob
-PyYAML==6.0
-Cython==0.29.21
