@@ -3,13 +3,3 @@ requests
 numpy
 chatterbot
 chatterbot_corpus
-spacy==2.0.18
-setuptools==58.0.0
-wheel==0.36.2
-cython==0.29.24
-cymem==2.0.6
-preshed==2.0.1
-murmurhash==1.0.5
-thinc==7.0.8
-tqdm==4.42.1
-plac==1.1.3
