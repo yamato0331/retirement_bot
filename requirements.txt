@@ -3,8 +3,8 @@ requests
 numpy
 chatterbot
 chatterbot_corpus
-spacy<3.0
+spacy==2.1.9
 setuptools==60.2.0
-wheel
-cymem
-preshed
+wheel==0.32.3
+cymem==2.0.8
+preshed==2.0.1
