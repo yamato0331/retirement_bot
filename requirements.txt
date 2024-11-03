@@ -8,3 +8,7 @@ setuptools==60.2.0
 wheel==0.32.3
 cymem==2.0.8
 preshed==2.0.1
+murmurhash==1.0.2
+thinc==7.0.8
+tqdm==4.42.1
+plac==1.1.3
