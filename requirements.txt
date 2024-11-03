@@ -6,4 +6,3 @@ chatterbot_corpus
 textblob
 PyYAML==5.3.1
 Cython==0.29.21
-ruamel.yaml==0.15.100
