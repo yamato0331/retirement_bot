@@ -3,3 +3,4 @@ chatterbot
 chatterbot_corpus
 sqlalchemy
 gunicorn
+setuptools==57.5.0
