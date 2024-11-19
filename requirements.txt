@@ -4,3 +4,5 @@ chatterbot_corpus
 sqlalchemy
 gunicorn
 setuptools==57.5.0
+cython==0.29.24
+wheel==0.36.2
