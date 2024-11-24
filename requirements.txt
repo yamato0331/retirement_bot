@@ -6,5 +6,5 @@ gunicorn
 setuptools==57.5.0
 cython==0.29.24
 wheel==0.36.2
-spacy==2.3.5
+spacy==2.3.7
 thinc==7.4.0
